@@ -1,11 +1,8 @@
 
 
 class Board:
-    def __init__(self,player="X"):
+    def __init__(self):
         self.board = [0,1,2,3,4,5,6,7,8]
-        self.turn = ("AI","Player")[int(player=="X")]
-        self.saveBoard = self.board
-        self.playerTurn()
     def printBoard(self):
         for i in range(3):
             s=""
@@ -123,7 +120,9 @@ class Board:
                 possible[i] = 99999999
         return min(possible)
 
-
+    def play(self):
+        self.board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        self.playerTurn()
 
     def getWinner(self, board):
         if board[0]==board[1]==board[2]:
@@ -149,3 +148,4 @@ class Board:
 
 if __name__ == "__main__":
     b = Board()
+    b.play()
