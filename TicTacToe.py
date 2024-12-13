@@ -147,4 +147,5 @@ class Board:
         else:
             return None
 
-b = Board()
+if __name__ == "__main__":
+    b = Board()
