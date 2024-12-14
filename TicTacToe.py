@@ -1,5 +1,4 @@
 from random import randint
-
 class Board:
     """The board, create instance of this class and run the play method to play"""
 
