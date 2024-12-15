@@ -38,7 +38,14 @@ class Board:
         for i in range(3):
             s=""
             for ii in range(3):
-                s+=str(self.__board[ii+3*i])+" "
+                x=str(self.__board[ii+3*i])
+                if x==self.__player:
+                    x = "\033[0;34m"+x+"\033[0m"
+                elif x in ("O","X"):
+                    x = "\033[0;31m" + x + "\033[0m"
+                else:
+                    x="\033[0;37m"+x+"\033[0m"
+                s+=x+" "
             print(s)
 
     def __playerTurn(self):
@@ -64,13 +71,13 @@ class Board:
         self.__updateBoard(choice,self.__player)
         winner = self.__getWinner(self.__board.copy())
         if winner == self.__player and not self.__gameEnded:
-            print("\033[32mPlayer wins\033[0m")
+            print("\033[0;34mPlayer wins\033[0m")
             self.__gameEnded=True
         elif winner == {"X":"O","O":"X"}[self.__player] and not self.__gameEnded:
-            print("\033[32mAI Wins\033[0m")
+            print("\033[0;31mAI Wins\033[0m")
             self.__gameEnded=True
         elif winner == "Tie" and not self.__gameEnded:
-            print("\033[32mTie\033[0m")
+            print("Tie")
             self.__gameEnded=True
         self.__AITurn()
 
@@ -102,14 +109,14 @@ class Board:
 
         winner = self.__getWinner(self.__board.copy())
         if winner==self.__player and not self.__gameEnded:
-            print("\033[32mPlayer wins\033[0m")
+            print("\033[0;34mPlayer wins\033[0m")
             self.__gameEnded=True
         elif winner=={"X":"O","O":"X"}[self.__player] and not self.__gameEnded:
-            print("\033[32mAI Wins\033[0m")
+            print("\033[0;31mAI Wins\033[0m")
             #print(self.__board)
             self.__gameEnded=True
         elif winner=="Tie" and not self.__gameEnded:
-            print("\033[32mTie\033[0m")
+            print("Tie")
             #print("gg")
             self.__gameEnded=True
             
@@ -196,4 +203,4 @@ class Board:
 
 if __name__ == "__main__":
     b = Board()
-    b.play()
+    b.play(("X","O")[randint(0,2)])
